@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework import filters
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.views import APIView
@@ -104,3 +105,5 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     queryset               = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes     = (permissions.UpdateOwnProfile,)
+    filter_backends        = (filters.SearchFilter,)
+    search_fields          = ('name', 'email',)
